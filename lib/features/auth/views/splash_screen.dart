@@ -30,109 +30,166 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Background Glow
-            Container(
-              width: 300,
-              height: 300,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.primary.withOpacity(0.15),
-              ),
-            ).animate().scale(
-                  begin: const Offset(0, 0),
-                  end: const Offset(2.5, 2.5),
-                  duration: 3.seconds,
-                  curve: Curves.easeOutExpo,
-                ),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-            Column(
+    return Scaffold(
+      backgroundColor: AppColors.dark,
+      body: Stack(
+        children: [
+          // 1. Dynamic Background Gradient / Mesh
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.5,
+                  colors: [
+                    AppColors.primary.withOpacity(0.15),
+                    AppColors.dark,
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          // 2. Animated Floating Particles (Simulated with Containers)
+          ...List.generate(5, (index) {
+            return Positioned(
+              top: 100.0 * (index + 1),
+              left: 50.0 * (index % 3),
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primary.withOpacity(0.05),
+                ),
+              ),
+            ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
+                  begin: 0,
+                  end: 30,
+                  duration: (2000 + (index * 500)).ms,
+                  curve: Curves.easeInOut,
+                ).blur(begin: const Offset(40, 40), end: const Offset(60, 60));
+          }),
+
+          // 3. Main Logo & Content
+          Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Animated Logo Icon
+                // 3D Logo Container
                 Container(
-                  padding: const EdgeInsets.all(24),
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withOpacity(0.3),
+                        blurRadius: 40,
+                        spreadRadius: 5,
+                      ),
+                    ],
                   ),
-                  child: ShaderMask(
-                    shaderCallback: (bounds) => AppColors.primaryGradient.createShader(bounds),
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 80,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )
-                    .animate(onPlay: (controller) => controller.repeat(reverse: true))
-                    .scale(
-                      begin: const Offset(1, 1),
-                      end: const Offset(1.1, 1.1),
-                      duration: 1200.ms,
-                      curve: Curves.easeInOut,
-                    )
                     .animate()
                     .fadeIn(duration: 800.ms)
-                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
+                    .scale(
+                      begin: const Offset(0.5, 0.5),
+                      end: const Offset(1, 1),
+                      duration: 1000.ms,
+                      curve: Curves.easeOutBack,
+                    )
+                    .animate(onPlay: (c) => c.repeat(reverse: true))
+                    .shimmer(duration: 3.seconds, color: Colors.white.withOpacity(0.2))
+                    .moveY(begin: -5, end: 5, duration: 2.seconds, curve: Curves.easeInOut),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 60),
 
-                // App Name
+                // Premium Typography
                 Text(
-                  'Flirtify',
+                  'FLIRTIFY',
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        letterSpacing: 4,
-                        color: Theme.of(context).brightness == Brightness.dark 
-                            ? AppColors.white 
-                            : AppColors.dark,
+                        letterSpacing: 12,
+                        fontSize: 32,
+                        shadows: [
+                          Shadow(
+                            color: AppColors.primary.withOpacity(0.5),
+                            blurRadius: 20,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
                 )
                     .animate()
-                    .fadeIn(delay: 400.ms, duration: 800.ms)
+                    .fadeIn(delay: 500.ms, duration: 1000.ms)
                     .slideY(begin: 0.5, end: 0, curve: Curves.easeOutBack),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
 
-                // Tagline
+                // Animated Tagline
                 Text(
-                  'Chemistry in every swipe.',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: AppColors.grey500,
-                        letterSpacing: 1.2,
+                  'CHEMISTRY IN EVERY SPARK',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.white70,
+                        letterSpacing: 3,
+                        fontWeight: FontWeight.w300,
                       ),
                 )
                     .animate()
-                    .fadeIn(delay: 800.ms, duration: 800.ms)
-                    .slideY(begin: 0.5, end: 0, curve: Curves.easeOutBack),
+                    .fadeIn(delay: 1000.ms, duration: 1000.ms)
+                    .blur(begin: const Offset(10, 0), end: const Offset(0, 0)),
               ],
             ),
+          ),
 
-            // Loading Indicator at bottom
-            Positioned(
-              bottom: 80,
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    AppColors.primary.withOpacity(0.5),
-                  ),
+          // 4. Bottom Progress (Modern Glass)
+          Positioned(
+            bottom: 60,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(2),
                 ),
-              ).animate().fadeIn(delay: 1500.ms),
+                child: FractionallySizedBox(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: 1.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: AppColors.primaryGradient,
+                      borderRadius: BorderRadius.circular(2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.5),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                ).animate().scaleX(
+                      begin: 0,
+                      end: 1,
+                      duration: 3000.ms,
+                      curve: Curves.easeInOut,
+                    ),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

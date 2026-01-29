@@ -46,14 +46,53 @@ class DiscoveryScreen extends StatelessWidget {
 
         if (controller.users.isEmpty) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(LineIcons.heartBroken, size: 60, color: AppColors.grey),
-                const SizedBox(height: 16),
-                const Text('No more sparks nearby!', style: TextStyle(color: AppColors.grey)),
-                TextButton(onPressed: controller.fetchUsers, child: const Text('Refresh')),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 250,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.2),
+                          blurRadius: 40,
+                          spreadRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Image.asset('assets/images/no_matches.png'),
+                  ).animate().scale(duration: 800.ms, curve: Curves.easeOutBack),
+                  const SizedBox(height: 40),
+                  Text(
+                    'NO MORE SPARKS NEARBY',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 2,
+                          color: Colors.white,
+                        ),
+                  ).animate().fadeIn(delay: 400.ms),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Expand your filters or check back later!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.grey500),
+                  ).animate().fadeIn(delay: 600.ms),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: controller.fetchUsers,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      backgroundColor: Colors.white,
+                      foregroundColor: AppColors.dark,
+                    ),
+                    child: const Text('REFRESH DISCOVERY'),
+                  ).animate().fadeIn(delay: 800.ms),
+                ],
+              ),
             ),
           );
         }
@@ -126,17 +165,25 @@ class DiscoveryScreen extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 30,
+            spreadRadius: -10,
+            offset: const Offset(0, 20),
+          ),
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.1),
+            blurRadius: 60,
+            spreadRadius: -20,
+            offset: const Offset(0, 40),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(32),
         child: Stack(
           children: [
             Obx(() {
@@ -153,8 +200,8 @@ class DiscoveryScreen extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                       placeholder: (context, url) => Container(
-                        color: AppColors.grey200,
-                        child: const Center(child: CircularProgressIndicator()),
+                        color: AppColors.grey900,
+                        child: const Center(child: CircularProgressIndicator(color: AppColors.primary)),
                       ),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                     )
@@ -195,33 +242,51 @@ class DiscoveryScreen extends StatelessWidget {
             // Photo Indicators
             if (allPhotos != null && allPhotos.length > 1)
               Positioned(
-                top: 10,
-                left: 10,
-                right: 10,
+                top: 15,
+                left: 15,
+                right: 15,
                 child: Row(
                   children: List.generate(
                     allPhotos.length,
                     (index) => Expanded(
                       child: Obx(() => Container(
-                            height: 3,
-                            margin: const EdgeInsets.symmetric(horizontal: 2),
+                            height: 4,
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
                             decoration: BoxDecoration(
                               color: currentPhotoIndex.value == index
                                   ? Colors.white
                                   : Colors.white.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(2),
+                              boxShadow: [
+                                if (currentPhotoIndex.value == index)
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 4,
+                                  ),
+                              ],
                             ),
                           )),
                     ),
                   ),
                 ),
               ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+            // Glassmorphic Overlay for Text Area
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 250,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.5),
+                      Colors.black.withOpacity(0.9),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
             ),

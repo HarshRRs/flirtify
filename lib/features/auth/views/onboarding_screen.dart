@@ -18,17 +18,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingData(
       title: 'Flirty vibes only',
       description: 'Find sparks without the strings. Just pure chemistry.',
-      icon: Icons.auto_awesome,
+      imagePath: 'assets/images/onboarding_spark.png',
     ),
     OnboardingData(
       title: 'Match on mood',
       description: 'Feeling playful? Or something more? Filter by your current vibe.',
-      icon: Icons.mood,
+      imagePath: 'assets/images/onboarding_mood.png',
     ),
     OnboardingData(
       title: 'Spicy chats safely',
       description: 'Verified profiles and encrypted chats for your peace of mind.',
-      icon: Icons.security,
+      imagePath: 'assets/images/logo.png', // Using logo for the final security/trust page
     ),
   ];
 
@@ -97,19 +97,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(data.icon, size: 120, color: AppColors.primary),
+          Container(
+            width: 250,
+            height: 250,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary.withOpacity(0.2),
+                  blurRadius: 40,
+                  spreadRadius: 5,
+                ),
+              ],
+            ),
+            child: Image.asset(data.imagePath),
+          ).animate().scale(duration: 800.ms, curve: Curves.easeOutBack),
           const SizedBox(height: 60),
           Text(
-            data.title,
+            data.title.toUpperCase(),
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 2,
+                  color: Colors.white,
+                ),
           ),
           const SizedBox(height: 24),
           Text(
             data.description,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.grey,
+                  color: AppColors.grey500,
+                  height: 1.5,
                 ),
           ),
         ],
@@ -121,11 +140,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 class OnboardingData {
   final String title;
   final String description;
-  final IconData icon;
+  final String imagePath;
 
   OnboardingData({
     required this.title,
     required this.description,
-    required this.icon,
+    required this.imagePath,
   });
 }
