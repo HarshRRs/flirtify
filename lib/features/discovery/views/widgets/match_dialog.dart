@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import '../../../../core/app_colors.dart';
+import '../../../chat/views/chat_detail_screen.dart';
 
 class MatchDialog extends StatelessWidget {
   final Map<String, dynamic> matchData;
@@ -63,7 +64,7 @@ class MatchDialog extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Get.back();
-                // Navigate to chat
+                Get.to(() => ChatDetailScreen(user: matchData));
               },
               child: const Text('Send Message'),
             ).animate().fadeIn(delay: 800.ms).slideX(begin: -0.2, end: 0),
