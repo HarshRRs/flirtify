@@ -32,6 +32,12 @@ class AppTheme {
           fontWeight: FontWeight.bold,
           color: AppColors.primary,
         ),
+        headlineSmall: GoogleFonts.poppins(
+          fontSize: 20,
+          fontWeight: FontWeight.w900,
+          color: AppColors.dark,
+          letterSpacing: 2,
+        ),
         titleLarge: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w600,

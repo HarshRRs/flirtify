@@ -48,7 +48,7 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
             gradient: widget.room['isBoosted'] == true 
                 ? AppColors.primaryGradient.withOpacity(0.8) 
                 : LinearGradient(
-                    colors: [Colors.black.withOpacity(0.5), Colors.transparent],
+                    colors: [Colors.white.withOpacity(0.8), Colors.white.withOpacity(0.2)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -59,17 +59,17 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
           children: [
             Text(
               widget.room['name'],
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(color: AppColors.dark, fontWeight: FontWeight.bold, fontSize: 18),
             ),
             Text(
               '${widget.room['participants'].length} vibing • ${widget.room['mood']}',
-              style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 12),
+              style: TextStyle(color: AppColors.grey600, fontSize: 12),
             ),
           ],
         ),
         actions: [
           IconButton(
-            icon: const Icon(LineIcons.infoCircle, color: Colors.white),
+            icon: const Icon(LineIcons.infoCircle, color: AppColors.primary),
             onPressed: () {},
           ),
         ],
@@ -87,23 +87,27 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
             ),
           ),
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Obx(() => ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.fromLTRB(16, 120, 16, 20),
-                itemCount: _roomController.roomMessages.length,
-                itemBuilder: (context, index) {
-                  final msg = _roomController.roomMessages[index];
-                  // In a real app, check if sender is ME
-                  final isMe = msg['senderId'] == _roomController.chatController.socket.id;
-                  return _buildMessageBubble(msg, isMe);
-                },
-              )),
-            ),
-            _buildInputArea(),
-          ],
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.85),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Obx(() => ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.fromLTRB(16, 120, 16, 20),
+                  itemCount: _roomController.roomMessages.length,
+                  itemBuilder: (context, index) {
+                    final msg = _roomController.roomMessages[index];
+                    final isMe = msg['senderId'] == _roomController.chatController.socket.id;
+                    return _buildMessageBubble(msg, isMe);
+                  },
+                )),
+              ),
+              _buildInputArea(),
+            ],
+          ),
         ),
       ),
     );
@@ -129,22 +133,28 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
             constraints: BoxConstraints(maxWidth: Get.width * 0.75),
             decoration: BoxDecoration(
               color: isMe 
-                  ? AppColors.primary.withOpacity(0.9) 
-                  : Colors.white.withOpacity(0.15),
+                  ? AppColors.primary 
+                  : AppColors.grey100,
               borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(20),
                 topRight: const Radius.circular(20),
                 bottomLeft: Radius.circular(isMe ? 20 : 4),
                 bottomRight: Radius.circular(isMe ? 4 : 20),
               ),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.1),
-                width: 0.5,
-              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Text(
               msg['message'],
-              style: const TextStyle(color: Colors.white, fontSize: 15),
+              style: TextStyle(
+                color: isMe ? Colors.white : AppColors.dark,
+                fontSize: 15,
+              ),
             ),
           ).animate().fadeIn(duration: 300.ms).slideX(begin: isMe ? 0.2 : -0.2, end: 0),
         ],
@@ -156,9 +166,15 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.8),
+        color: AppColors.white,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
-        border: Border.all(color: Colors.white.withOpacity(0.1), width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 20,
+            offset: const Offset(0, -10),
+          ),
+        ],
       ),
       child: SafeArea(
         child: Row(
@@ -166,15 +182,16 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: AppColors.grey50,
                   borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: AppColors.grey200),
                 ),
                 child: TextField(
                   controller: _messageController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: AppColors.dark),
                   decoration: InputDecoration(
                     hintText: 'Add to the vibe...',
-                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    hintStyle: TextStyle(color: AppColors.grey400),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),

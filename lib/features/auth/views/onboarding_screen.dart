@@ -120,7 +120,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                   letterSpacing: 2,
-                  color: Colors.white,
+                  color: AppColors.dark,
                 ),
           ),
           const SizedBox(height: 24),

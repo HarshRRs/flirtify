@@ -14,7 +14,15 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color dark = Color(0xFF121212);
-  static const Color surface = Color(0xFFF8F9FA);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFFF8F9FA);
+  
+  // Custom Gradients for Light Mode
+  static const LinearGradient lightFrostGradient = LinearGradient(
+    colors: [Colors.white70, Colors.white10],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
   
   // Greys
   static const Color grey50 = Color(0xFFF8F9FA);

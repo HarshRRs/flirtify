@@ -281,8 +281,8 @@ class DiscoveryScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       Colors.transparent,
-                      Colors.black.withOpacity(0.5),
-                      Colors.black.withOpacity(0.9),
+                      Colors.white.withOpacity(0.4),
+                      Colors.white.withOpacity(0.9),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -302,7 +302,7 @@ class DiscoveryScreen extends StatelessWidget {
                       Text(
                         '$name, $age',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.dark,
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),

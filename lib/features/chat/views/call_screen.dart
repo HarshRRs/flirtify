@@ -63,7 +63,7 @@ class _CallScreenState extends State<CallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Stack(
         children: [
           // Animated Background Glow
@@ -73,7 +73,7 @@ class _CallScreenState extends State<CallScreen> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary.withOpacity(0.2),
+                color: AppColors.primary.withOpacity(0.1),
               ),
             ).animate(onPlay: (c) => c.repeat()).scale(
               begin: const Offset(1, 1),
@@ -97,13 +97,13 @@ class _CallScreenState extends State<CallScreen> {
                       border: Border.all(color: AppColors.primary, width: 2),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withOpacity(0.2),
                           blurRadius: 30,
                           spreadRadius: 5,
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.person, size: 60, color: Colors.white),
+                    child: const Icon(Icons.person, size: 60, color: AppColors.primary),
                   ).animate().scale(duration: 600.ms, curve: Curves.easeOutBack),
                   
                   const SizedBox(height: 32),
@@ -117,7 +117,7 @@ class _CallScreenState extends State<CallScreen> {
                   
                   Text(
                     widget.targetUser['name'] ?? "Someone Special",
-                    style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: AppColors.dark, fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   
                   const Spacer(),
