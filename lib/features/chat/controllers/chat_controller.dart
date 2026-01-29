@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import '../views/call_screen.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/api_service.dart';
@@ -23,7 +24,8 @@ class ChatController extends GetxController {
 
     if (userId == null) return;
 
-    socket = IO.io('http://localhost:5000', <String, dynamic>{
+    // Updated to point to your Railway domain
+    socket = IO.io('https://flirtify-production.up.railway.app', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
@@ -122,6 +124,59 @@ class ChatController extends GetxController {
       'type': type,
       'imageUrl': type == 'image' ? base64Media : null,
       'videoUrl': type == 'video' ? base64Media : null,
+    });
+  }
+
+  void startCall(dynamic targetUser, String type) async {
+    try {
+      final response = await ApiService.get('/calls/room?receiverId=${targetUser['_id']}');
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        
+        // Notify the target user via socket
+        socket.emit('call_user', {
+          'userToCall': targetUser['_id'],
+          'from': (await SharedPreferences.getInstance()).getString('userId'),
+          'name': 'Someone special', 
+          'type': type,
+          'roomName': data['roomName'],
+          'serverUrl': data['serverUrl'],
+        });
+
+        // Open CallScreen
+        Get.to(() => CallScreen(
+          roomName: data['roomName'],
+          serverUrl: data['serverUrl'],
+          subject: data['subject'],
+          type: type,
+          targetUser: targetUser,
+        ));
+      }
+    } catch (e) {
+      print('Call error: $e');
+    }
+  }
+
+  void setupIncomingCallListener() {
+    socket.on('incoming_call', (data) {
+      // Show call dialog or jump to CallScreen
+      Get.defaultDialog(
+        title: "Incoming ${data['type']} Call",
+        middleText: "Accept call from ${data['name']}?",
+        textConfirm: "Accept",
+        textCancel: "Decline",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+          Get.to(() => CallScreen(
+            roomName: data['roomName'],
+            serverUrl: data['serverUrl'],
+            subject: 'Flirtify Private Call',
+            type: data['type'],
+            targetUser: {'_id': data['from'], 'name': data['name']},
+          ));
+        },
+      );
     });
   }
 

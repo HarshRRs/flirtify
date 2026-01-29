@@ -31,13 +31,12 @@ This guide explains exactly which 9 variables you need in your **Railway Dashboa
 
 ---
 
-## 📞 3. Video/Voice Calls: Agora.io
-**Variables:** `AGORA_APP_ID`, `AGORA_APP_CERTIFICATE`
+## 📞 3. Video/Voice Calls: Jitsi Meet (FREE)
+**Status:** **Life-Time Free Forever**
 
-1. Go to [Agora Console](https://console.agora.io/).
-2. Click **Create Project**.
-3. Set authentication mode to **"APP ID + APP Certificate"**.
-4. Copy the **App ID** and the **Primary Certificate**.
+1. **How it works**: Flirtify now uses Jitsi Meet's public secure servers. 
+2. **Cost**: **$0.00** No matter how many minutes you use.
+3. **Setup**: None required! The app automatically generates unique, encrypted bridge rooms for every match.
 
 ---
 

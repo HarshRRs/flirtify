@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { generateToken } = require('../controllers/callController');
+const { generateCallRoom } = require('../controllers/callController');
 const { protect } = require('../middleware/authMiddleware');
 
-router.get('/token', protect, generateToken);
+router.get('/room', protect, generateCallRoom);
 
 module.exports = router;

@@ -1,37 +1,31 @@
-const { RtcTokenBuilder, RtcRole } = require('agora-token');
+const crypto = require('crypto');
 
-exports.generateToken = async (req, res) => {
-  const { channelName, role } = req.query;
-  const appId = process.env.AGORA_APP_ID;
-  const appCertificate = process.env.AGORA_APP_CERTIFICATE;
-
-  if (!channelName) {
-    return res.status(400).json({ message: 'Channel name is required' });
-  }
-
-  // Set default role to subscriber
-  let agoraRole = RtcRole.SUBSCRIBER;
-  if (role === 'publisher') {
-    agoraRole = RtcRole.PUBLISHER;
-  }
-
-  // Token expires in 1 hour
-  const expirationTimeInSeconds = 3600;
-  const currentTimestamp = Math.floor(Date.now() / 1000);
-  const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
-
-  // Build the token
+/**
+ * Generates a unique, secure room name for Jitsi Meet.
+ * This ensures "Free Forever" calling for Flirtify users.
+ */
+exports.generateCallRoom = async (req, res) => {
   try {
-    const token = RtcTokenBuilder.buildTokenWithUid(
-      appId,
-      appCertificate,
-      channelName,
-      0, // uid 0 means the server generates one
-      agoraRole,
-      privilegeExpiredTs
-    );
-    res.json({ token, appId });
+    const { receiverId } = req.query;
+    const senderId = req.user._id;
+
+    if (!receiverId) {
+      return res.status(400).json({ message: 'Receiver ID is required' });
+    }
+
+    // Generate a secure, unique room name derived from both user IDs
+    // We sort IDs to ensure both users get the same room name
+    const ids = [senderId.toString(), receiverId.toString()].sort();
+    const combined = ids.join('_');
+    const roomName = `flirtify_${crypto.createHash('md5').update(combined).digest('hex')}`;
+
+    res.json({
+      roomName,
+      serverUrl: 'https://meet.jit.si', // Using public secure bridge
+      subject: 'Flirtify Private Call'
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error generating token' });
+    console.error('Jitsi Room Error:', error);
+    res.status(500).json({ message: 'Error establishing call room' });
   }
 };
