@@ -30,7 +30,7 @@ class _HeatMapScreenState extends State<HeatMapScreen> {
         clusters.value = jsonDecode(response.body);
       }
     } catch (e) {
-      print('Error fetching heatmap: $e');
+      debugPrint('Error fetching heatmap: $e');
     } finally {
       isLoading.value = false;
     }

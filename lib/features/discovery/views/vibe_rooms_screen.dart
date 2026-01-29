@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../../../core/app_colors.dart';
 import '../controllers/room_controller.dart';
+import 'vibe_room_chat_screen.dart';
 
 class VibeRoomsScreen extends StatelessWidget {
   const VibeRoomsScreen({super.key});
@@ -85,8 +86,11 @@ class VibeRoomsScreen extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              // Join room logic
+            onPressed: () async {
+              final success = await controller.joinRoom(room['_id']);
+              if (success) {
+                Get.to(() => VibeRoomChatScreen(room: room));
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: room['isBoosted'] == true ? Colors.white : AppColors.primary,

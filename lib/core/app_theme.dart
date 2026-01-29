@@ -98,7 +98,7 @@ class AppTheme {
         ),
         hintStyle: const TextStyle(color: AppColors.grey500),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.white,
         elevation: 8,
         shadowColor: Colors.black.withOpacity(0.05),
@@ -212,7 +212,7 @@ class AppTheme {
         ),
         hintStyle: const TextStyle(color: AppColors.grey600),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: Color(0xFF1E1E1E),
         elevation: 0,
         shape: RoundedRectangleBorder(

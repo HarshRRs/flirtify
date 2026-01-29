@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../views/call_screen.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -61,7 +62,7 @@ class ChatController extends GetxController {
         }));
       }
     } catch (e) {
-      print('Error fetching history: $e');
+      debugPrint('Error fetching history: $e');
     } finally {
       isLoadingHistory.value = false;
     }
@@ -74,7 +75,7 @@ class ChatController extends GetxController {
         icebreaker.value = jsonDecode(response.body)['icebreaker'];
       }
     } catch (e) {
-      print('Wingman error: $e');
+      debugPrint('Wingman error: $e');
     }
   }
 
@@ -87,7 +88,7 @@ class ChatController extends GetxController {
       'receiverId': receiverId,
       'message': text,
       'type': 'text',
-      'timestamp': DateTime.now().toIso8601String(),
+      'timestamp': DateTime.now().toIso8601String()
     };
 
     socket.emit('send_message', messageData);
@@ -112,7 +113,7 @@ class ChatController extends GetxController {
       'type': type,
       'imageUrl': type == 'image' ? base64Media : null,
       'videoUrl': type == 'video' ? base64Media : null,
-      'timestamp': DateTime.now().toIso8601String(),
+      'timestamp': DateTime.now().toIso8601String()
     };
 
     socket.emit('send_message', messageData);
@@ -153,7 +154,7 @@ class ChatController extends GetxController {
         ));
       }
     } catch (e) {
-      print('Call error: $e');
+      debugPrint('Call error: $e');
     }
   }
 
@@ -178,11 +179,5 @@ class ChatController extends GetxController {
         },
       );
     });
-  }
-
-  @override
-  void onClose() {
-    socket.dispose();
-    super.onClose();
   }
 }

@@ -8,7 +8,7 @@ import 'package:video_player/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/app_colors.dart';
 import '../controllers/chat_controller.dart';
-import '../controllers/call_controller.dart';
+// import '../controllers/call_controller.dart'; // Disabled - agora package not available
 
 class ChatDetailScreen extends StatefulWidget {
   final dynamic user;
@@ -21,7 +21,7 @@ class ChatDetailScreen extends StatefulWidget {
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
   final _messageController = TextEditingController();
   final _chatController = Get.find<ChatController>();
-  final _callController = Get.put(CallController());
+  // final _callController = Get.put(CallController()); // Disabled - agora package not available
   final _picker = ImagePicker();
   String? _currentUserId;
 
@@ -84,14 +84,6 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.call, color: AppColors.primary),
-            onPressed: () => _callController.startCall(widget.user, 'voice'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.videocam, color: AppColors.primary),
-            onPressed: () => _callController.startCall(widget.user, 'video'),
-          ),
           IconButton(
             icon: const Icon(Icons.bolt, color: AppColors.primary),
             onPressed: () {
@@ -317,7 +309,7 @@ class _VideoMessagePlayerState extends State<VideoMessagePlayer> {
           )
         : const SizedBox(
             height: 200,
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(child: CircularProgressIndicator())
           );
   }
 

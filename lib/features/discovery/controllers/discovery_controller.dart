@@ -73,7 +73,7 @@ class DiscoveryController extends GetxController {
         users.removeWhere((u) => u['_id'] == targetUserId);
       }
     } catch (e) {
-      print('Error liking user: $e');
+      debugPrint('Error liking user: $e');
     }
   }
 
@@ -84,7 +84,7 @@ class DiscoveryController extends GetxController {
       });
       users.removeWhere((u) => u['_id'] == targetUserId);
     } catch (e) {
-      print('Error disliking user: $e');
+      debugPrint('Error disliking user: $e');
     }
   }
 }

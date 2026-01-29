@@ -4,7 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   // Update this with your actual Railway public domain from the 'Settings' tab
-  static const String baseUrl = 'https://flirtify-production.up.railway.app/api'; 
+  static const String baseUrl = String.fromEnvironment(
+    'BASE_URL',
+    defaultValue: 'https://flirtify-production.up.railway.app/api',
+  );
 
   static Future<Map<String, String>> _getHeaders() async {
     final prefs = await SharedPreferences.getInstance();

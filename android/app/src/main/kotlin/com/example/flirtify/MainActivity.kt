@@ -1,4 +1,4 @@
-package com.flirtify.flirtify
+package com.example.flirtify
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -38,7 +38,6 @@ class FilterBottomSheet extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 32),
-          
           // Age Range
           Text(
             'Age Range',
@@ -63,9 +62,7 @@ class FilterBottomSheet extends StatelessWidget {
               Text('${controller.ageRange.value.end.round()} years'),
             ],
           )),
-          
           const SizedBox(height: 32),
-          
           // Max Distance
           Text(
             'Maximum Distance',
@@ -87,9 +84,7 @@ class FilterBottomSheet extends StatelessWidget {
               Text('${controller.maxDistance.value.round()} km'),
             ],
           )),
-          
           const SizedBox(height: 48),
-          
           ElevatedButton(
             onPressed: () {
               controller.fetchUsers();

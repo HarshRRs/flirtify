@@ -30,7 +30,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
         matches.value = jsonDecode(response.body);
       }
     } catch (e) {
-      print('Error fetching matches: $e');
+      debugPrint('Error fetching matches: $e');
     } finally {
       isLoading.value = false;
     }

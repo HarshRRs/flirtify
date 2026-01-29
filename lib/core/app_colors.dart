@@ -26,6 +26,10 @@ class AppColors {
   static const Color grey600 = Color(0xFF495057);
   static const Color grey700 = Color(0xFF343A40);
   static const Color grey800 = Color(0xFF212529);
+  static const Color grey900 = Color(0xFF1A1D21); // Darkest grey
+  static const Color softGrey = Color(0xFFE9ECEF); // Soft grey for subtle backgrounds
+  static const Color grey = Color(0xFF6C757D); // Default grey (same as grey500)
+  static const Color softPink = Color(0xFFFFE5E9); // Soft pink for backgrounds
   
   // Semantic Colors
   static const Color success = Color(0xFF28A745);

@@ -17,7 +17,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS
 const io = new Server(server, {
   cors: {
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+      if (!origin || (allowedOrigins.length > 0 && (allowedOrigins.includes(origin) || allowedOrigins.includes("*")))) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
@@ -44,7 +44,7 @@ app.use('/api/', limiter); // Apply rate limiting to all requests under /api/
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+    if (!origin || (allowedOrigins.length > 0 && (allowedOrigins.includes(origin) || allowedOrigins.includes("*")))) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

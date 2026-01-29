@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 40,
                         spreadRadius: 5,
                       ),
@@ -100,16 +100,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 )
                     .animate()
-                    .fadeIn(duration: 800.ms)
+                    .fadeIn(duration: const Duration(milliseconds: 800))
                     .scale(
                       begin: const Offset(0.5, 0.5),
                       end: const Offset(1, 1),
-                      duration: 1000.ms,
+                      duration: const Duration(milliseconds: 1000),
                       curve: Curves.easeOutBack,
                     )
                     .animate(onPlay: (c) => c.repeat(reverse: true))
-                    .shimmer(duration: 3.seconds, color: Colors.white.withOpacity(0.2))
-                    .moveY(begin: -5, end: 5, duration: 2.seconds, curve: Curves.easeInOut),
+                    .shimmer(duration: const Duration(seconds: 3), color: Colors.white.withValues(alpha: 0.2))
+                    .moveY(begin: -5, end: 5, duration: const Duration(seconds: 2), curve: Curves.easeInOut),
 
                 const SizedBox(height: 60),
 
@@ -123,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         fontSize: 32,
                         shadows: [
                           Shadow(
-                            color: AppColors.primary.withOpacity(0.5),
+                            color: AppColors.primary.withValues(alpha: 0.5),
                             blurRadius: 20,
                             offset: const Offset(0, 4),
                           ),
@@ -131,7 +131,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                 )
                     .animate()
-                    .fadeIn(delay: 500.ms, duration: 1000.ms)
+                    .fadeIn(delay: const Duration(milliseconds: 500), duration: const Duration(milliseconds: 1000))
                     .slideY(begin: 0.5, end: 0, curve: Curves.easeOutBack),
 
                 const SizedBox(height: 16),
@@ -146,7 +146,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                 )
                     .animate()
-                    .fadeIn(delay: 1000.ms, duration: 1000.ms)
+                    .fadeIn(delay: const Duration(milliseconds: 1000), duration: const Duration(milliseconds: 1000))
                     .blur(begin: const Offset(10, 0), end: const Offset(0, 0)),
               ],
             ),
@@ -183,7 +183,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ).animate().scaleX(
                       begin: 0,
                       end: 1,
-                      duration: 3000.ms,
+                      duration: const Duration(milliseconds: 3000),
                       curve: Curves.easeInOut,
                     ),
               ),

@@ -52,7 +52,7 @@ class ConfessionController extends GetxController {
         fetchConfessions();
       }
     } catch (e) {
-      print('Error hearting confession: $e');
+      debugPrint('Error hearting confession: $e');
     }
   }
 }
