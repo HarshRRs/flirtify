@@ -1,0 +1,41 @@
+# General
+node_modules/
+**/node_modules/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
+
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+ios/.generated/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+android/app/key.properties
+android/app/upload-keystore.jks
+android/.gradle
+android/local.properties
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m
+
+# Windows
+windows/flutter/ephemeral/
+windows/flutter/generated_plugins.cmake
+
+# Backend Specific
+backend/node_modules/
+backend/.env
+backend/npm-debug.log*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.lock
