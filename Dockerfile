@@ -1,21 +1,20 @@
-# Use Node.js LTS
-FROM node:18-alpine
+# Use Node.js LTS (matches the version in user logs)
+FROM node:22-alpine
 
-# Set working directory to /app
+# Set working directory
 WORKDIR /app
 
-# Copy backend dependency files first for caching
+# Copy only the backend folder contents into /app
+# This ensures that /app/index.js will exist correctly
 COPY backend/package*.json ./
-
-# Install production dependencies
 RUN npm install --production
-
-# Copy the rest of the backend source code
-# This copies everything inside 'backend/' into '/app/'
 COPY backend/ .
 
-# Expose the port
+# Ensure production environment
+ENV NODE_ENV=production
+ENV PORT=5000
+
 EXPOSE 5000
 
-# Start the application directly from the root of the backend
+# Run the app
 CMD [ "node", "index.js" ]
