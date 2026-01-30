@@ -58,7 +58,7 @@ class DiscoveryScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           blurRadius: 40,
                           spreadRadius: 5,
                         ),
@@ -166,16 +166,16 @@ class DiscoveryScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
-        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1.5),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             blurRadius: 30,
             spreadRadius: -10,
             offset: const Offset(0, 20),
           ),
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.primary.withValues(alpha: 0.1),
             blurRadius: 60,
             spreadRadius: -20,
             offset: const Offset(0, 40),
@@ -255,12 +255,12 @@ class DiscoveryScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: currentPhotoIndex.value == index
                                   ? Colors.white
-                                  : Colors.white.withOpacity(0.3),
+                                  : Colors.white.withValues(alpha: 0.3),
                               borderRadius: BorderRadius.circular(2),
                               boxShadow: [
                                 if (currentPhotoIndex.value == index)
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withValues(alpha: 0.2),
                                     blurRadius: 4,
                                   ),
                               ],
@@ -281,8 +281,8 @@ class DiscoveryScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       Colors.transparent,
-                      Colors.white.withOpacity(0.4),
-                      Colors.white.withOpacity(0.9),
+                      Colors.white.withValues(alpha: 0.4),
+                      Colors.white.withValues(alpha: 0.9),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -327,7 +327,7 @@ class DiscoveryScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.8),
+                      color: AppColors.primary.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -343,7 +343,7 @@ class DiscoveryScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
+                            color: Colors.white.withValues(alpha: 0.3),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(Icons.volume_up, color: Colors.white),
@@ -368,7 +368,7 @@ class DiscoveryScreen extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),

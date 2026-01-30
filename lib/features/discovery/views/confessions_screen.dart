@@ -47,7 +47,7 @@ class ConfessionsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.softGrey,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.softPink.withOpacity(0.3)),
+        border: Border.all(color: AppColors.softPink.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +80,7 @@ class ConfessionsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 5,
                         offset: const Offset(0, 2),
                       ),

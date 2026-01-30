@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   center: Alignment.center,
                   radius: 1.5,
                   colors: [
-                    AppColors.primary.withOpacity(0.15),
+                    AppColors.primary.withValues(alpha: 0.15),
                     AppColors.dark,
                   ],
                 ),
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primary.withOpacity(0.05),
+                  color: AppColors.primary.withValues(alpha: 0.05),
                 ),
               ),
             ).animate(onPlay: (c) => c.repeat(reverse: true)).moveY(
@@ -172,7 +172,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       borderRadius: BorderRadius.circular(2),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.5),
+                          color: AppColors.primary.withValues(alpha: 0.5),
                           blurRadius: 10,
                         ),
                       ],

@@ -40,14 +40,19 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0.1),
+        backgroundColor: Colors.white.withValues(alpha: 0.1),
         elevation: 0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: widget.room['isBoosted'] == true 
-                ? AppColors.primaryGradient.withOpacity(0.8) 
+                ? LinearGradient(
+                    colors: [
+                      AppColors.primary.withValues(alpha: 0.8),
+                      AppColors.secondary.withValues(alpha: 0.8)
+                    ],
+                  )
                 : LinearGradient(
-                    colors: [Colors.white.withOpacity(0.8), Colors.white.withOpacity(0.2)],
+                    colors: [Colors.white.withValues(alpha: 0.8), Colors.white.withValues(alpha: 0.2)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -81,14 +86,14 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
             ),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.6),
+              Colors.black.withValues(alpha: 0.6),
               BlendMode.darken,
             ),
           ),
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.85),
+            color: Colors.white.withValues(alpha: 0.85),
           ),
           child: Column(
             children: [
@@ -142,7 +147,7 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 5,
                   offset: const Offset(0, 2),
                 ),
@@ -169,7 +174,7 @@ class _VibeRoomChatScreenState extends State<VibeRoomChatScreen> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 20,
             offset: const Offset(0, -10),
           ),

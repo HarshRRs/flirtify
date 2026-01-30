@@ -73,7 +73,7 @@ class _CallScreenState extends State<CallScreen> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withValues(alpha: 0.1),
               ),
             ).animate(onPlay: (c) => c.repeat()).scale(
               begin: const Offset(1, 1),
@@ -97,7 +97,7 @@ class _CallScreenState extends State<CallScreen> {
                       border: Border.all(color: AppColors.primary, width: 2),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           blurRadius: 30,
                           spreadRadius: 5,
                         ),

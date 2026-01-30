@@ -64,7 +64,7 @@ class _HeatMapScreenState extends State<HeatMapScreen> {
                       height: 60,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.4),
+                          color: AppColors.primary.withValues(alpha: 0.4),
                           shape: BoxShape.circle,
                         ),
                         child: Center(

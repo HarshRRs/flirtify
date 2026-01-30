@@ -99,7 +99,7 @@ class SettingsScreen extends StatelessWidget {
     return Switch(
       value: value,
       onChanged: onChanged,
-      activeColor: AppColors.primary,
+      activeThumbColor: AppColors.primary,
     );
   }
 }
