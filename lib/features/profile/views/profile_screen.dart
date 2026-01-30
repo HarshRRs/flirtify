@@ -59,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                   style: const TextStyle(color: AppColors.grey),
                 ),
                 const SizedBox(height: 30),
-                _buildStats(user),
+                _buildStats(Map<String, dynamic>.from(user)),
                 const SizedBox(height: 30),
                 _buildMenu(context),
               ],

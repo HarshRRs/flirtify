@@ -78,7 +78,7 @@ class _CallScreenState extends State<CallScreen> {
             ).animate(onPlay: (c) => c.repeat()).scale(
               begin: const Offset(1, 1),
               end: const Offset(1.5, 1.5),
-              duration: 2.seconds,
+              duration: const Duration(seconds: 2),
               curve: Curves.easeInOut,
             ).fadeOut(),
           ),
@@ -111,7 +111,7 @@ class _CallScreenState extends State<CallScreen> {
                   Text(
                     widget.type == 'video' ? "Iniciating Video Call..." : "Calling...",
                     style: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 2),
-                  ).animate(onPlay: (c) => c.repeat()).fadeIn(duration: 1.seconds).fadeOut(delay: 500.ms),
+                  ).animate(onPlay: (c) => c.repeat()).fadeIn(duration: const Duration(seconds: 1)).fadeOut(delay: 500.ms),
                   
                   const SizedBox(height: 8),
                   
