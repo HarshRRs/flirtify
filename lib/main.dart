@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'core/app_colors.dart';
 import 'core/app_theme.dart';
+import 'core/theme_controller.dart';
 import 'features/auth/views/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(ThemeController());
   
   // Production Error Handling
   FlutterError.onError = (details) {

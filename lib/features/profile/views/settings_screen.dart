@@ -2,22 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../../../core/app_colors.dart';
-import '../controllers/profile_controller.dart';
+import '../../../core/theme_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeController = Get.find<ThemeController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          _buildSection('Appearance'),
+          Obx(() => _buildSettingsTile(
+            LineIcons.moon,
+            'Dark Mode',
+            () => themeController.toggleTheme(!themeController.isDarkMode.value),
+            trailing: _buildSwitch(
+              themeController.isDarkMode.value,
+              (val) => themeController.toggleTheme(val)
+            )
+          )),
+          const SizedBox(height: 24),
+
           _buildSection('Account'),
           _buildSettingsTile(LineIcons.user, 'Personal Information', () {}),
           _buildSettingsTile(LineIcons.envelope, 'Email Address', () {}),
@@ -26,13 +40,13 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 24),
           _buildSection('Privacy'),
           _buildSettingsTile(LineIcons.lock, 'Blocked Users', () {}),
-          _buildSettingsTile(LineIcons.eye, 'Profile Visibility', () {}, trailing: _buildSwitch(true)),
-          _buildSettingsTile(LineIcons.mapMarker, 'Location Sharing', () {}, trailing: _buildSwitch(true)),
+          _buildSettingsTile(LineIcons.eye, 'Profile Visibility', () {}, trailing: _buildSwitch(true, (v) {})),
+          _buildSettingsTile(LineIcons.mapMarker, 'Location Sharing', () {}, trailing: _buildSwitch(true, (v) {})),
 
           const SizedBox(height: 24),
           _buildSection('Notifications'),
-          _buildSettingsTile(LineIcons.bell, 'Push Notifications', () {}, trailing: _buildSwitch(true)),
-          _buildSettingsTile(LineIcons.comment, 'New Matches', () {}, trailing: _buildSwitch(true)),
+          _buildSettingsTile(LineIcons.bell, 'Push Notifications', () {}, trailing: _buildSwitch(true, (v) {})),
+          _buildSettingsTile(LineIcons.comment, 'New Matches', () {}, trailing: _buildSwitch(true, (v) {})),
 
           const SizedBox(height: 48),
           ElevatedButton(
@@ -81,11 +95,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSwitch(bool value) {
+  Widget _buildSwitch(bool value, Function(bool) onChanged) {
     return Switch(
       value: value,
-      onChanged: (val) {},
-      activeColor: AppColors.primary,
+      onChanged: onChanged,
+      activeThumbColor: AppColors.primary,
     );
   }
 }
