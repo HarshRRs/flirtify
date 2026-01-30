@@ -34,14 +34,14 @@ class VibeRoomsScreen extends StatelessWidget {
           itemCount: controller.rooms.length,
           itemBuilder: (context, index) {
             final room = controller.rooms[index];
-            return _buildRoomCard(context, room);
+            return _buildRoomCard(context, room, controller);
           },
         );
       }),
     );
   }
 
-  Widget _buildRoomCard(BuildContext context, dynamic room) {
+  Widget _buildRoomCard(BuildContext context, dynamic room, RoomController controller) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
