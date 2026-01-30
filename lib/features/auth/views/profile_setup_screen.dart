@@ -21,7 +21,6 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
   final List<String?> _photos = List.generate(6, (_) => null);
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
-  final _bioController = TextEditingController();
   String _selectedGender = 'male';
   final _picker = ImagePicker();
   

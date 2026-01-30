@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/app_colors.dart';
 import '../../../core/api_service.dart';
 import '../controllers/chat_controller.dart';
 import 'chat_detail_screen.dart';

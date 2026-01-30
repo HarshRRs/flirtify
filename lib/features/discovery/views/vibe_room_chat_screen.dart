@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/app_colors.dart';

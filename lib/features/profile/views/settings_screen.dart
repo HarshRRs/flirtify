@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/theme_controller.dart';
-import '../controllers/profile_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
